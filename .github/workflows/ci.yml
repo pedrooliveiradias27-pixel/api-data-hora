@@ -24,4 +24,13 @@ jobs:
               run: npm ci
               
             - name: Executar testes
-              run: npm test  
+              run: npm test
+    docker:
+       runs-on: ubuntu-latest
+       needs: test
+       steps:
+           - name: Baixar codigo
+             uses: actions/checkout@v6
+               
+           - name: Construir imagem Docker
+             run: docker build -t api-data-hora .
